@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Файзуллин Альберт | Java Backend разработчик</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* CSS Variables for light / dark themes */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.5;
+      transition: background-color 0.3s, color 0.3s;
+      padding: 2rem 1.5rem;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Light theme (default) */
+    body.light {
+      --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #e9ecf2 100%);
+      --card-bg: rgba(255,255,255,0.85);
+      --card-shadow: 0 20px 40px -12px rgba(0,0,0,0.15);
+      --text-primary: #1e293b;
+      --text-secondary: #334155;
+      --text-muted: #475569;
+      --border-light: #e2e8f0;
+      --accent: #2563eb;
+      --accent-soft: #3b82f6;
+      --skill-tag-bg: #eef2ff;
+      --skill-tag-text: #1e40af;
+      --icon-color: #4b5563;
+      --header-bg: rgba(255,255,255,0.5);
+    }
+
+    /* Dark theme */
+    body.dark {
+      --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      --card-bg: rgba(30, 41, 59, 0.9);
+      --card-shadow: 0 20px 40px -12px rgba(0,0,0,0.6);
+      --text-primary: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --border-light: #334155;
+      --accent: #38bdf8;
+      --accent-soft: #7dd3fc;
+      --skill-tag-bg: #1e293b;
+      --skill-tag-text: #bae6fd;
+      --icon-color: #94a3b8;
+      --header-bg: rgba(15, 23, 42, 0.6);
+    }
+
+    body {
+      background: var(--bg-gradient);
+      color: var(--text-primary);
+      backdrop-filter: blur(2px);
+    }
+
+    .resume-card {
+      max-width: 1100px;
+      width: 100%;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 2.5rem;
+      padding: 2.5rem 2.2rem;
+      box-shadow: var(--card-shadow);
+      border: 1px solid var(--border-light);
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    /* Theme toggle button */
+    .theme-toggle {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 1.5rem;
+    }
+
+    .theme-toggle button {
+      background: var(--skill-tag-bg);
+      border: 1px solid var(--border-light);
+      color: var(--text-primary);
+      width: 48px;
+      height: 48px;
+      border-radius: 60px;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    .theme-toggle button:hover {
+      transform: scale(1.07);
+      background: var(--accent-soft);
+      color: #0f172a;
+    }
+
+    /* Header section */
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .name-title h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      background: linear-gradient(120deg, var(--accent), var(--accent-soft));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.3rem;
+    }
+
+    .name-title .subhead {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem 1.8rem;
+      background: var(--header-bg);
+      padding: 1.2rem 1.8rem;
+      border-radius: 60px;
+      border: 1px solid var(--border-light);
+      backdrop-filter: blur(4px);
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .contact-item i {
+      font-size: 1.1rem;
+      color: var(--accent);
+      width: 20px;
+    }
+
+    .contact-item a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-bottom: 1px dotted transparent;
+      transition: 0.2s;
+    }
+
+    .contact-item a:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    /* Objective */
+    .objective {
+      background: var(--skill-tag-bg);
+      padding: 1.5rem 2rem;
+      border-radius: 2rem;
+      margin-bottom: 2.5rem;
+      border-left: 6px solid var(--accent);
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.02);
+    }
+
+    /* 2-column layout */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Section styling */
+    .section {
+      margin-bottom: 2rem;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      color: var(--text-primary);
+      border-bottom: 2px dashed var(--border-light);
+      padding-bottom: 0.5rem;
+    }
+
+    .section-title i {
+      color: var(--accent);
+      font-size: 1.3rem;
+    }
+
+    /* Skills tags cloud */
+    .skills-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 0.8rem;
+    }
+
+    .skill-tag {
+      background: var(--skill-tag-bg);
+      color: var(--skill-tag-text);
+      padding: 0.4rem 1rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: 1px solid var(--border-light);
+      transition: 0.1s;
+    }
+
+    .skill-tag:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+    }
+
+    /* Education & project cards */
+    .edu-item, .project-item {
+      margin-bottom: 1.5rem;
+    }
+
+    .edu-title, .project-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--text-primary);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 0.25rem;
+    }
+
+    .edu-meta, .project-meta {
+      font-size: 0.9rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .edu-desc, .project-desc {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-top: 0.3rem;
+      padding-left: 0.5rem;
+      border-left: 2px solid var(--border-light);
+    }
+
+    .project-desc ul {
+      list-style: none;
+      margin-top: 0.3rem;
+    }
+
+    .project-desc li {
+      margin-bottom: 0.2rem;
+      display: flex;
+      gap: 0.6rem;
+    }
+
+    .project-desc li i {
+      color: var(--accent);
+      font-size: 0.8rem;
+      margin-top: 0.2rem;
+      width: 16px;
+    }
+
+    /* soft skills / languages */
+    .soft-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .soft-item {
+      background: var(--skill-tag-bg);
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-light);
+    }
+
+    .soft-item i {
+      color: var(--accent);
+    }
+
+    /* additional info row */
+    .extra-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    /* footer / interests */
+    .footer-note {
+      margin-top: 2rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border-light);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    /* responsive */
+    @media (max-width: 750px) {
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .contact-info {
+        width: 100%;
+        border-radius: 2rem;
+      }
+      .main-grid {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+      .extra-row {
+        grid-template-columns: 1fr;
+      }
+      .name-title h1 {
+        font-size: 2.2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .resume-card {
+        padding: 1.5rem;
+      }
+      .contact-info {
+        flex-direction: column;
+        gap: 0.7rem;
+      }
+    }
+  </style>
+</head>
+<body class="light"> <!-- default light theme -->
+  <div class="resume-card">
+    <!-- Theme toggle button -->
+    <div class="theme-toggle">
+      <button id="themeToggle" aria-label="Переключить тему">
+        <i class="fas fa-moon" id="themeIcon"></i>
+      </button>
+    </div>
+
+    <!-- Header: Name + contacts -->
+    <div class="header">
+      <div class="name-title">
+        <h1>Файзуллин Альберт Ринатович</h1>
+        <div class="subhead">
+          <i class="fas fa-code"></i> Junior Java Backend разработчик
+        </div>
+      </div>
+      <div class="contact-info">
+        <div class="contact-item"><i class="fas fa-phone-alt"></i> <span>+7 (901) 749-88-15</span></div>
+        <div class="contact-item"><i class="fas fa-envelope"></i> <a href="mailto:albertozavrr@yandex.ru">albertozavrr@yandex.ru</a></div>
+        <div class="contact-item"><i class="fas fa-map-marker-alt"></i> Москва, Россия</div>
+      </div>
+    </div>
+
+    <!-- Objective / summary -->
+    <div class="objective">
+      <i class="fas fa-quote-left" style="margin-right: 0.5rem; opacity: 0.7;"></i>
+      Начинающий Java-разработчик с хорошей теоретической базой и опытом создания учебных проектов. Ищу возможность применить свои знания в коммерческой разработке, готов к интенсивному обучению и работе в команде. Стремлюсь писать чистый, поддерживаемый код и осваивать современные инструменты backend-разработки.
+    </div>
+
+    <!-- Main two columns -->
+    <div class="main-grid">
+      <!-- Left column: Skills & Education -->
+      <div>
+        <!-- Skills section -->
+        <div class="section">
+          <div class="section-title"><i class="fas fa-cogs"></i> Технические навыки</div>
+          <div class="skills-cloud">
+            <span class="skill-tag">Java Core</span>
+            <span class="skill-tag">Java 8/11</span>
+            <span class="skill-tag">Spring Boot</span>
+            <span class="skill-tag">Spring MVC</span>
+            <span class="skill-tag">Spring Data JPA</span>
+            <span class="skill-tag">Hibernate</span>
+            <span class="skill-tag">JPA / JDBC</span>
+            <span class="skill-tag">REST API</span>
+            <span class="skill-tag">PostgreSQL</span>
+            <span class="skill-tag">MySQL</span>
+            <span class="skill-tag">Maven</span>
+            <span class="skill-tag">Gradle</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">JUnit / Mockito</span>
+            <span class="skill-tag">Docker (basics)</span>
+            <span class="skill-tag">Postman</span>
+            <span class="skill-tag">HTML/CSS/JS</span>
+            <span class="skill-tag">Tomcat</span>
+            <span class="skill-tag">Swagger</span>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="section">
+          <div class="section-title"><i class="fas fa-graduation-cap"></i> Образование</div>
+          <div class="edu-item">
+            <div class="edu-title">
+              Московский политехнический универсистет
+              <span class="edu-meta">2021–2025</span>
+            </div>
+            <div class="edu-desc">
+              Факультет информационных технологий, направление: "Информационные технологии в медиаиндустрии и дизайне"
+            </div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-title">
+              Курс «Java 25» 
+              <span class="edu-meta">2023–2024</span>
+            </div>
+            <div class="edu-desc">
+              Java Rush. Изучение Java Core, алгоритмов (1000+ задач).
+            </div>
+          </div>
+        </div>
+
+        <!-- Soft skills & Languages -->
+        <div class="section">
+          <div class="section-title"><i class="fas fa-users"></i> Soft skills & языки</div>
+          <div class="soft-list">
+            <span class="soft-item"><i class="fas fa-brain"></i> Аналитическое мышление</span>
+            <span class="soft-item"><i class="fas fa-comments"></i> Коммуникабельность</span>
+            <span class="soft-item"><i class="fas fa-rocket"></i> Обучаемость</span>
+            <span class="soft-item"><i class="fas fa-user-check"></i> Ответственность</span>
+            <span class="soft-item"><i class="fas fa-users-cog"></i> Командная работа</span>
+            <span class="soft-item"><i class="fas fa-language"></i> Английский (B1, чтение тех. документации)</span>
+            <span class="soft-item"><i class="fas fa-language"></i> Русский (родной)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right column: Projects & additional -->
+      <div>
+        <!-- Projects -->
+        <div class="section">
+          <div class="section-title"><i class="fas fa-laptop-code"></i> Пет-проекты</div>
+
+          <div class="project-item">
+            <div class="project-title">
+              Online Store API
+              <span class="project-meta">Spring Boot / PostgreSQL</span>
+            </div>
+            <div class="project-desc">
+              <ul>
+                <li><i class="fas fa-angle-right"></i> RESTful сервис для интернет-магазина: товары, корзина, заказы, пользователи.</li>
+                <li><i class="fas fa-angle-right"></i> Использованы Spring Data JPA, Hibernate, миграции Liquibase, документация Swagger.</li>
+                <li><i class="fas fa-angle-right"></i> Написаны интеграционные тесты (JUnit, Testcontainers).</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="project-item">
+            <div class="project-title">
+              Task Manager (консоль)
+              <span class="project-meta">Java Core / File I/O</span>
+            </div>
+            <div class="project-desc">
+              <ul>
+                <li><i class="fas fa-angle-right"></i> Приложение для управления задачами с авторизацией, хранением данных в JSON.</li>
+                <li><i class="fas fa-angle-right"></i> Реализованы коллекции, лямбды, stream API, паттерн MVC.</li>
+                <li><i class="fas fa-angle-right"></i> Покрытие юнит-тестами (JUnit 5, Mockito).</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="project-item">
+            <div class="project-title">
+              URL Shortener
+              <span class="project-meta">Spring MVC / Hibernate / MySQL</span>
+            </div>
+            <div class="project-desc">
+              <ul>
+                <li><i class="fas fa-angle-right"></i> Веб-сервис сокращения ссылок: генерация короткого кода, статистика переходов.</li>
+                <li><i class="fas fa-angle-right"></i> Реализована валидация, кастомные исключения, интернационализация.</li>
+                <li><i class="fas fa-angle-right"></i> Сборка Maven, развертывание в Tomcat, Docker-образ.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Footer / ключевая информация -->
+    <div class="footer-note">
+      <span><i class="fas fa-briefcase"></i> Готов к стажировке / полной занятости</span>
+      <span><i class="fas fa-globe"></i> Готов к переезду / удаленной работе</span>
+    </div>
+  </div>
+
+  <!-- JavaScript for theme toggle -->
+  <script>
+    (function() {
+      const body = document.body;
+      const themeIcon = document.getElementById('themeIcon');
+      const themeToggle = document.getElementById('themeToggle');
+
+      // Check localStorage for saved theme
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        body.classList.remove('light');
+        body.classList.add('dark');
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+      } else {
+        // default light
+        body.classList.add('light');
+        themeIcon.classList.add('fa-moon');
+      }
+
+      themeToggle.addEventListener('click', () => {
+        if (body.classList.contains('light')) {
+          body.classList.remove('light');
+          body.classList.add('dark');
+          themeIcon.classList.remove('fa-moon');
+          themeIcon.classList.add('fa-sun');
+          localStorage.setItem('theme', 'dark');
+        } else {
+          body.classList.remove('dark');
+          body.classList.add('light');
+          themeIcon.classList.remove('fa-sun');
+          themeIcon.classList.add('fa-moon');
+          localStorage.setItem('theme', 'light');
+        }
+      });
+
+      // Optional: smooth console greeting (just to demonstrate JS)
+      console.log('Резюме Файзуллина Альберта. Тема переключается ;)');
+    })();
+  </script>
+</body>
+</html>
